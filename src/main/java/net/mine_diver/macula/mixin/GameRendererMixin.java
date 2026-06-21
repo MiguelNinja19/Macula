@@ -20,6 +20,7 @@ public abstract class GameRendererMixin {
             at = @At("HEAD")
     )
     private void beginRender(float var1, long var2, CallbackInfo ci) {
+        if (SmoothBetaCompat.LOADED) return;
         ShaderCore.beginRender(minecraft, var1, var2);
     }
 
@@ -28,7 +29,7 @@ public abstract class GameRendererMixin {
             at = @At("RETURN")
     )
     private void endRender(CallbackInfo ci) {
-        if (!ShaderPack.shaderPackLoaded) return;
+        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
         ShaderCore.endRender();
     }
 
