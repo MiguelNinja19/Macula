@@ -66,7 +66,6 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectTerrainBegin(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED) return;
         if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
         ShaderCore.beginTerrain();
     }
@@ -82,7 +81,6 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectTerrainEnd(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED) return;
         if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
         ShaderCore.endTerrain();
     }
