@@ -28,7 +28,7 @@ public abstract class GameRendererMixin {
             at = @At("RETURN")
     )
     private void endRender(CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
         ShaderCore.endRender();
     }
 

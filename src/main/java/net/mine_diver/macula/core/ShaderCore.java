@@ -68,8 +68,6 @@ public class ShaderCore {
 
         if (ShadowMapManager.isShadowPass) return;
 
-        if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) return;
-
         if (!isInitialized) init();
         if (!ShaderPack.shaderPackLoaded) return;
         if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) return;
@@ -101,6 +99,12 @@ public class ShaderCore {
 
     public static void endRender() {
         if (ShadowMapManager.isShadowPass) return;
+
+        if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) {
+            org.lwjgl.opengl.GL30.glBindVertexArray(0);
+            org.lwjgl.opengl.GL15.glBindBuffer(org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER, 0);
+            org.lwjgl.opengl.GL15.glBindBuffer(org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+        }
 
         GL11.glPushMatrix();
 
