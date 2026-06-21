@@ -1,5 +1,6 @@
 package net.mine_diver.macula.mixin;
 
+import net.mine_diver.macula.compat.SmoothBetaCompat;
 import net.mine_diver.macula.utils.GL;
 import net.mine_diver.macula.core.ShaderPack;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -18,7 +19,7 @@ public class LivingEntityRendererMixin {
             )
     )
     private void onGlEnable(int i) {
-        if (!ShaderPack.shaderPackLoaded) {
+        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) {
             GL11.glEnable(i);
             return;
         }
@@ -33,7 +34,7 @@ public class LivingEntityRendererMixin {
             )
     )
     private void onGlDisable(int i) {
-        if (!ShaderPack.shaderPackLoaded) {
+        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) {
             GL11.glDisable(i);
             return;
         }

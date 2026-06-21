@@ -1,5 +1,6 @@
 package net.mine_diver.macula.mixin;
 
+import net.mine_diver.macula.compat.SmoothBetaCompat;
 import net.mine_diver.macula.utils.GL;
 import net.mine_diver.macula.core.ShaderPack;
 import net.mine_diver.macula.shaders.uniform.PositionUniforms;
@@ -34,7 +35,7 @@ public class WorldRendererMixin {
             )
     )
     private void onGlEnable(int i) {
-        if (!ShaderPack.shaderPackLoaded) {
+        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) {
             GL11.glEnable(i);
             return;
         }
@@ -49,7 +50,7 @@ public class WorldRendererMixin {
             )
     )
     private void onGlDisable(int i) {
-        if (!ShaderPack.shaderPackLoaded) {
+        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) {
             GL11.glDisable(i);
             return;
         }
