@@ -1,8 +1,8 @@
 package net.mine_diver.macula.mixin;
 
-import net.mine_diver.macula.util.GLUtils;
-import net.mine_diver.macula.ShaderPack;
-import net.mine_diver.macula.shader.uniform.PositionUniforms;
+import net.mine_diver.macula.utils.GL;
+import net.mine_diver.macula.core.ShaderPack;
+import net.mine_diver.macula.shaders.uniform.PositionUniforms;
 import net.minecraft.client.render.WorldRenderer;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,7 +38,7 @@ public class WorldRendererMixin {
             GL11.glEnable(i);
             return;
         }
-        GLUtils.glEnableWrapper(i);
+        GL.glEnableWrapper(i);
     }
 
     @Redirect(
@@ -53,6 +53,6 @@ public class WorldRendererMixin {
             GL11.glDisable(i);
             return;
         }
-        GLUtils.glDisableWrapper(i);
+        GL.glDisableWrapper(i);
     }
 }

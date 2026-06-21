@@ -1,7 +1,7 @@
 package net.mine_diver.macula.mixin;
 
-import net.mine_diver.macula.util.GLUtils;
-import net.mine_diver.macula.ShaderPack;
+import net.mine_diver.macula.utils.GL;
+import net.mine_diver.macula.core.ShaderPack;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +22,7 @@ public class LivingEntityRendererMixin {
             GL11.glEnable(i);
             return;
         }
-        GLUtils.glEnableWrapper(i);
+        GL.glEnableWrapper(i);
     }
 
     @Redirect(
@@ -37,6 +37,6 @@ public class LivingEntityRendererMixin {
             GL11.glDisable(i);
             return;
         }
-        GLUtils.glDisableWrapper(i);
+        GL.glDisableWrapper(i);
     }
 }

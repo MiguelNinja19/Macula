@@ -1,8 +1,9 @@
 package net.mine_diver.macula.mixin;
 
-import net.mine_diver.macula.ShaderPack;
-import net.mine_diver.macula.shader.ShaderCore;
-import net.mine_diver.macula.util.TessellatorAccessor;
+import net.mine_diver.macula.compat.SmoothBetaCompat;
+import net.mine_diver.macula.core.ShaderPack;
+import net.mine_diver.macula.core.ShaderCore;
+import net.mine_diver.macula.utils.TessellatorAccess;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.util.GlAllocationUtils;
 import org.lwjgl.opengl.ARBVertexProgram;
@@ -17,7 +18,7 @@ import java.nio.ByteBuffer;
 import java.nio.ShortBuffer;
 
 @Mixin(Tessellator.class)
-public class TessellatorMixin implements TessellatorAccessor {
+public class TessellatorMixin implements TessellatorAccess {
     @Shadow private int mode;
 
     @Shadow private static boolean useTriangles;
@@ -48,6 +49,7 @@ public class TessellatorMixin implements TessellatorAccessor {
             )
     )
     private void onDraw1(CallbackInfo ci) {
+        if (SmoothBetaCompat.LOADED) return;
         if (!ShaderPack.shaderPackLoaded) return;
         if (ShaderCore.entityAttrib >= 0) {
             ARBVertexProgram.glEnableVertexAttribArrayARB(ShaderCore.entityAttrib);
@@ -64,6 +66,7 @@ public class TessellatorMixin implements TessellatorAccessor {
             )
     )
     private void onDraw2(CallbackInfo ci) {
+        if (SmoothBetaCompat.LOADED) return;
         if (!ShaderPack.shaderPackLoaded) return;
         if (ShaderCore.entityAttrib >= 0)
             ARBVertexProgram.glDisableVertexAttribArrayARB(ShaderCore.entityAttrib);
@@ -83,6 +86,7 @@ public class TessellatorMixin implements TessellatorAccessor {
             at = @At(value = "HEAD")
     )
     private void onAddVertex(CallbackInfo ci) {
+        if (SmoothBetaCompat.LOADED) return;
         if (!ShaderPack.shaderPackLoaded) return;
         if (mode == 7 && useTriangles && (addedVertexCount + 1) % 4 == 0 && hasNormals) {
             buffer[bufferPosition + 6] = buffer[(bufferPosition - 24) + 6];

@@ -72,6 +72,9 @@ dependencies {
 	implementation "org.joml:joml:1.10.8"
 
 	include "org.joml:joml:1.10.8"
+
+	modCompileOnly "net.modificationstation:StationAPI:${project.stapi_version}"
+	modCompileOnly "maven.modrinth:smoothbeta:${project.smoothbeta_version}"
 }
 
 processResources {
