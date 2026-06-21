@@ -68,6 +68,8 @@ public class ShaderCore {
 
         if (ShadowMapManager.isShadowPass) return;
 
+        if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) return;
+
         if (!isInitialized) init();
         if (!ShaderPack.shaderPackLoaded) return;
         if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) return;
