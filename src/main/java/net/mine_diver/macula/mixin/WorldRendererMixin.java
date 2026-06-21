@@ -31,7 +31,7 @@ public class WorldRendererMixin {
     }
 
     @Inject(
-            method = "renderLastChunks(ID)V",
+            method = "method_1540(ID)V",
             at = @At("HEAD")
     )
     private void beforeSmoothBetaRender(int d, double par2, CallbackInfo ci) {
@@ -40,7 +40,7 @@ public class WorldRendererMixin {
     }
 
     @Inject(
-            method = "renderLastChunks(ID)V",
+            method = "method_1540(ID)V",
             at = @At("RETURN")
     )
     private void afterSmoothBetaRender(int d, double par2, CallbackInfo ci) {
