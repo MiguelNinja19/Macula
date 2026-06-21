@@ -1,11 +1,14 @@
 package net.mine_diver.macula.mixin;
 
 import net.mine_diver.macula.compat.SmoothBetaCompat;
+import net.mine_diver.macula.rendering.FramebufferManager;
 import net.mine_diver.macula.utils.GL;
 import net.mine_diver.macula.core.ShaderPack;
 import net.mine_diver.macula.shaders.uniform.PositionUniforms;
 import net.minecraft.client.render.WorldRenderer;
+import org.lwjgl.opengl.ARBFramebufferObject;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,6 +28,24 @@ public class WorldRendererMixin {
     private void onGetStarBrightness(float par1, CallbackInfo ci) {
         if (!ShaderPack.shaderPackLoaded) return;
         PositionUniforms.updateCelestialPosition();
+    }
+
+    @Inject(
+            method = "renderLastChunks(ID)V",
+            at = @At("HEAD")
+    )
+    private void beforeSmoothBetaRender(int d, double par2, CallbackInfo ci) {
+        if (!SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        GL20.glDrawBuffers(ARBFramebufferObject.GL_COLOR_ATTACHMENT0);
+    }
+
+    @Inject(
+            method = "renderLastChunks(ID)V",
+            at = @At("RETURN")
+    )
+    private void afterSmoothBetaRender(int d, double par2, CallbackInfo ci) {
+        if (!SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        GL20.glDrawBuffers(FramebufferManager.defaultDrawBuffers);
     }
 
     @Redirect(
