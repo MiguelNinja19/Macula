@@ -18,6 +18,10 @@ loom {
 	intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
 
+configurations.all {
+	exclude group: 'org.ow2.asm', module: 'asm-all'
+}
+
 repositories {
 	// Used for the fabric toolchain in this project.
 	maven {
@@ -65,9 +69,7 @@ dependencies {
 		mappings "net.glasslauncher:bin:${project.yarn_mappings}"
 		mappings "net.glasslauncher:biny:${project.latest_yarn_mappings}:v2"
 	}
-	modImplementation("babric:fabric-loader:${project.loader_version}") {
-		exclude group: 'org.ow2.asm', module: 'asm-all'
-	}
+	modImplementation "babric:fabric-loader:${project.loader_version}"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
