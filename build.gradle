@@ -1,5 +1,6 @@
 plugins {
-	id 'babric-loom' version '1.6.2'
+	id 'fabric-loom' version '1.8.12'
+	id 'babric-loom-extension' version '1.8.9'
 	id 'maven-publish'
 }
 
@@ -13,7 +14,6 @@ version = project.mod_version
 group = project.maven_group
 
 loom {
-	gluedMinecraftJar()
 	customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/${minecraft_version}.json")
 	intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
