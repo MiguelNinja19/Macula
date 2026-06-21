@@ -63,7 +63,8 @@ public class ShaderCore {
     }
 
     public static void beginRender(Minecraft minecraft, float f, long l) {
-        if (minecraft.world != null) rainStrength = minecraft.world.getRainGradient(f);
+        if (minecraft.world == null) return;
+        rainStrength = minecraft.world.getRainGradient(f);
 
         if (ShadowMapManager.isShadowPass) return;
 
