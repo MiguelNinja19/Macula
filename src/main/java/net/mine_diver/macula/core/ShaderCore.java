@@ -69,6 +69,7 @@ public class ShaderCore {
 
         if (!isInitialized) init();
         if (!ShaderPack.shaderPackLoaded) return;
+        if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) return;
         if (MINECRAFT.displayWidth != FramebufferManager.renderWidth || MINECRAFT.displayHeight != FramebufferManager.renderHeight)
             FramebufferManager.resize(MINECRAFT.displayWidth, MINECRAFT.displayHeight);
 

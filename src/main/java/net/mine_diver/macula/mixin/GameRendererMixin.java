@@ -20,7 +20,6 @@ public abstract class GameRendererMixin {
             at = @At("HEAD")
     )
     private void beginRender(float var1, long var2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED) return;
         ShaderCore.beginRender(minecraft, var1, var2);
     }
 
