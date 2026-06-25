@@ -40,7 +40,7 @@ public abstract class GameRendererMixin {
             )
     )
     private void setClearColor(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
         FramebufferManager.setClearColor(field_2346, field_2347, field_2348);
     }
 
@@ -53,7 +53,7 @@ public abstract class GameRendererMixin {
             )
     )
     private void setCamera(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
         PositionUniforms.updateCamera(l);
     }
 
@@ -66,7 +66,9 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectTerrainBegin(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+        // When SmoothBeta is loaded, terrain is rendered by SmoothBeta's VBO pipeline
+        // Macula's beginTerrain sets up TEXTURED program for non-terrain geometry
         ShaderCore.beginTerrain();
     }
 
@@ -81,7 +83,7 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectTerrainEnd(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
         ShaderCore.endTerrain();
     }
 
@@ -95,7 +97,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectWaterBegin1(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.beginWater();
     }
 
@@ -110,7 +113,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectWaterEnd1(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.endWater();
     }
 
@@ -124,7 +128,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectWaterBegin2(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.beginWater();
     }
 
@@ -139,7 +144,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectWaterEnd2(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.endWater();
     }
 
@@ -151,7 +157,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectBeginWater3(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.beginWater();
     }
 
@@ -164,7 +171,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectEndWater3(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.endWater();
     }
 
@@ -176,7 +184,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectBeginWeather(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.beginWeather();
     }
 
@@ -189,7 +198,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectEndWeather(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.endWeather();
     }
 
@@ -201,7 +211,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectBeginHand(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.beginHand();
     }
 
@@ -214,7 +225,8 @@ public abstract class GameRendererMixin {
             )
     )
     private void injectEndHand(float l, long par2, CallbackInfo ci) {
-        if (SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+</parameter
         ShaderCore.endHand();
     }
 

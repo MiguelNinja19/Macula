@@ -70,7 +70,6 @@ public class ShaderCore {
 
         if (!isInitialized) init();
         if (!ShaderPack.shaderPackLoaded) return;
-        if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) return;
         if (MINECRAFT.displayWidth != FramebufferManager.renderWidth || MINECRAFT.displayHeight != FramebufferManager.renderHeight)
             FramebufferManager.resize(MINECRAFT.displayWidth, MINECRAFT.displayHeight);
 
@@ -91,19 +90,27 @@ public class ShaderCore {
             MINECRAFT.options.thirdPerson = preShadowPassThirdPersonView;
         }
 
+        // Bind Macula's default FBO for main render
         ARBFramebufferObject.glBindFramebuffer(ARBFramebufferObject.GL_FRAMEBUFFER,
                 FramebufferManager.defaultFramebufferId);
 
-        ShaderProgram.useShaderProgram(ShaderProgramType.TEXTURED);
+        // If SmoothBeta is loaded, let it render terrain to COLOR_ATTACHMENT0
+        if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) {
+            net.mine_diver.macula.compat.SmoothBetaCompat.beforeTerrainRender();
+            // SmoothBeta's terrain shader will be bound by its WorldRendererMixin
+            // We use TEXTURED program for non-terrain passes
+            ShaderProgram.useShaderProgram(ShaderProgramType.TEXTURED);
+        } else {
+            ShaderProgram.useShaderProgram(ShaderProgramType.TEXTURED);
+        }
     }
 
     public static void endRender() {
         if (ShadowMapManager.isShadowPass) return;
 
+        // If SmoothBeta loaded, clean up its VAO/VBO state and restore draw buffers
         if (net.mine_diver.macula.compat.SmoothBetaCompat.LOADED) {
-            org.lwjgl.opengl.GL30.glBindVertexArray(0);
-            org.lwjgl.opengl.GL15.glBindBuffer(org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER, 0);
-            org.lwjgl.opengl.GL15.glBindBuffer(org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+            net.mine_diver.macula.compat.SmoothBetaCompat.afterTerrainRender();
         }
 
         GL11.glPushMatrix();

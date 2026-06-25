@@ -35,7 +35,8 @@ public class WorldRendererMixin {
             at = @At("HEAD")
     )
     private void beforeSmoothBetaRender(int d, double par2, CallbackInfo ci) {
-        if (!SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+        // SmoothBeta renders water/entities to single color attachment
         GL20.glDrawBuffers(ARBFramebufferObject.GL_COLOR_ATTACHMENT0);
     }
 
@@ -44,7 +45,8 @@ public class WorldRendererMixin {
             at = @At("RETURN")
     )
     private void afterSmoothBetaRender(int d, double par2, CallbackInfo ci) {
-        if (!SmoothBetaCompat.LOADED || !ShaderPack.shaderPackLoaded) return;
+        if (!ShaderPack.shaderPackLoaded) return;
+        // Restore Macula's multi-draw-buffer setup
         GL20.glDrawBuffers(FramebufferManager.defaultDrawBuffers);
     }
 
